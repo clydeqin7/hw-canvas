@@ -6,70 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        #hb {
-            display:block;
-            background: green;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        .tools{
-            position: fixed;
-            bottom: 0;
-            left: 0;    
-        }
-        
-        .tools > #brush {
-            display: none;
-        }
-        .tools.x > #brush {
-            display: inline-block;
-        }
-        .tools.x > #eraser {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <canvas id="hb" width=300 height=300 ></canvas>
+    <canvas id="hb" width=300 height=300></canvas>
     <div id='tools' class='tools'>
         <button id='eraser'>橡皮擦</button>
-        <button id='brush'>画笔</button>
+        <div class='brushAll'>
+            <button id='brush'>画笔</button>
+        </div>
+        <select name="toolSize" id="toolSize">
+            <option value="1">s</option>
+            <option value="4" selected>m</option>
+            <option value="7">l</option>
+            <option value="10">xl</option>
+        </select>
     </div>
     <script>
         var canvas = document.getElementById('hb');
         var context = canvas.getContext('2d');
-        
+
+        // 获取当前的size变化
+        var currentSize = toolSize.value
+        toolSize.onchange = function () {
+            currentSize = toolSize.value
+        }
+
         autoSetCanvasSize()
 
         listenToMouse(canvas)
 
         var eraserEnabled = false
-        eraser.onclick = function(){
+        eraser.onclick = function () {
             eraserEnabled = true
             tools.className = "tools x"
         }
-        brush.onclick = function(){
+        brush.onclick = function () {
             eraserEnabled = false
             tools.className = "tools"
         }
 
         /***************/
-        function listenToMouse(canvas){
+        function listenToMouse(canvas) {
             var using = false;
-            var lastPoint = {x:0, y:0}
+            var lastPoint = { x: 0, y: 0 }
             canvas.onmousedown = function (dff) {
                 var x = dff.clientX;
                 var y = dff.clientY;
                 using = true
-                if(eraserEnabled){
-                    context.clearRect(x-5,y-5,10,10)
-                }else{
-                    if(using){
+                if (eraserEnabled) {
+                    setClearRect(x, y, currentSize)
+                } else {
+                    if (using) {
                         lastPoint.x = x;
                         lastPoint.y = y;
                     }
@@ -77,59 +66,63 @@
             }
 
 
-            canvas.onmousemove = function(dff){
+
+            canvas.onmousemove = function (dff) {
                 var x2 = dff.clientX;
                 var y2 = dff.clientY;
-                if(using){
-                    if(eraserEnabled){
-                        context.clearRect(x2-5,y2-5,10,10)
-                    }else{
-                        drawLine(lastPoint.x,lastPoint.y,x2,y2)
+                if (using) {
+                    if (eraserEnabled) {
+                        setClearRect(x2, y2, currentSize)
+                    } else {
+                        drawLine(lastPoint.x, lastPoint.y, x2, y2)
                         lastPoint.x = x2
                         lastPoint.y = y2
                     }
                 }
             }
 
-            canvas.onmouseup = function(){
+            canvas.onmouseup = function () {
                 using = false;
             }
         }
 
-
+        /*根据size大小设置清除范围*/
+        function setClearRect(x, y, size){
+            var sizeX = size * 5
+            context.clearRect(x-sizeX/2, y-sizeX/2, sizeX, sizeX)
+        }        
 
         /*划圆*/
-        function drawCircle(x, y, radius){
+        function drawCircle(x, y, radius) {
             context.beginPath();
-            context.arc(x,y,radius,0,Math.PI * 2);
+            context.arc(x, y, radius, 0, Math.PI * 2);
             context.fill();
         }
-        
+
         /*划线*/
-        function drawLine(x1, y1, x2, y2){
+        function drawLine(x1, y1, x2, y2) {
             context.beginPath()
             context.strokeStyle = 'black'
-            context.lineWith = 10 
+            context.lineWidth = currentSize
             context.moveTo(x1, y1)
-            context.lineTo(x2,y2)
+            context.lineTo(x2, y2)
             context.stroke()
         }
-        
-        function autoSetCanvasSize(){
+
+        function autoSetCanvasSize() {
             setCanvasSize()
 
-            window.onresize = function(){
+            window.onresize = function () {
                 setCanvasSize()
             }
 
-            function setCanvasSize(){
+            function setCanvasSize() {
                 var pageWidth = document.documentElement.clientWidth
                 var pageHeight = document.documentElement.clientHeight
                 canvas.width = pageWidth
                 canvas.height = pageHeight
             }
-        }        
- 
+        }
     </script>
 </body>
 
