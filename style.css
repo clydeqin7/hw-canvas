@@ -1,22 +1,97 @@
 #zzzz {
   display: block;
-  background: #E3EDCD;
+  background: #e3edcd;
 }
 
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  list-style: none;
+}
+
+body {
+  overflow: hidden;
+}
+.icon {
+  width: 2em;
+  height: 2em;
+  vertical-align: -0.15em;
+  overflow: hidden;
+  padding: 5px;
+  transition: all 0.3s;
+}
+
+.tools svg.active {
+  fill: red;
+  transform: scale(1.2);
 }
 
 .tools {
   display: flex;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   align-items: stretch;
+  margin: 10px;
 }
 
-.tools  .brushAll{
+.penColor {
+  position: fixed;
+  top: 55px;
+  left: 10px;
+}
+
+.penColor ul>li{
+  width:20px;
+  height:20px;
+  margin: 8px 5px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.penColor ul>#red{
+  background:red;
+}
+
+.penColor ul>#green{
+  background:green;
+}
+
+.penColor ul>#blue{
+  background:blue;
+}
+
+.penColor ul>li.active{
+  transform: scale(1.2);
+}
+
+.penStyle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  /*border: 1px red solid;*/
+}
+
+.penStyle ul > #thick{
+  width: 30px;
+  height: 10px;
+  background: black;
+  margin-bottom: 15px;
+  border-radius: 10%;
+}
+
+.penStyle ul > #thin{
+  width: 30px;
+  height: 5px;
+  background: black;
+  border-radius: 10%;  
+}
+
+/*.tools  .brushAll{
   display: none;
 }
 
@@ -25,4 +100,4 @@
 }
 .tools.x > #eraser {
   display: none;
-}
+}*/

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的画板</title>
     <link rel="stylesheet" href="./style.css">
@@ -12,18 +12,45 @@
 <body>
     <canvas id="zzzz" width=300 height=300></canvas>
     <div id='tools' class='tools'>
-        <button id='eraser'>橡皮擦</button>
+        <svg class="icon active" aria-hidden="true"  id='brush'>
+            <use xlink:href="#icon-pen"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true"  id='eraser'>
+            <use xlink:href="#icon-eraser"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true"  id='clearDraw'>
+            <use xlink:href="#icon-delete"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true"  id='xiazai'>
+            <use xlink:href="#icon-xiazai"></use>
+        </svg>
+        <!--<button id='eraser'>橡皮擦</button>
         <div class='brushAll'>
+
             <button id='brush'>画笔</button>
-        </div>
-        <select name="toolSize" id="toolSize">
+        </div>-->
+        <!--<select name="toolSize" id="toolSize">
             <option value="1">s</option>
             <option value="4" selected>m</option>
             <option value="7">l</option>
             <option value="10">xl</option>
-        </select>
+        </select>-->
+    </div>
+    <div class="penColor">
+        <ul>
+            <li id="red" class="active"></li>
+            <li id="green"></li>
+            <li id="blue"></li>
+        </ul>
+    </div>
+    <div class="penStyle">
+        <ul>
+            <li id="thick"></li>
+            <li id="thin"></li>
+        </ul>
     </div>
     <script src="./main.js"></script>
+    <script src="//at.alicdn.com/t/font_479719_dzr8xireggbymn29.js"></script>
 </body>
 
 </html>
