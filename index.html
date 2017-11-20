@@ -11,10 +11,10 @@
 
 <body>
     <canvas id="zzzz" width=300 height=300></canvas>
+    <svg class="icon active" aria-hidden="true"  id='brush'>
+        <use xlink:href="#icon-pen"></use>
+    </svg>
     <div id='tools' class='tools'>
-        <svg class="icon active" aria-hidden="true"  id='brush'>
-            <use xlink:href="#icon-pen"></use>
-        </svg>
         <svg class="icon" aria-hidden="true"  id='eraser'>
             <use xlink:href="#icon-eraser"></use>
         </svg>
@@ -36,18 +36,30 @@
             <option value="10">xl</option>
         </select>-->
     </div>
-    <div class="penColor">
-        <ul>
-            <li id="red" class="active"></li>
-            <li id="green"></li>
-            <li id="blue"></li>
-        </ul>
-    </div>
-    <div class="penStyle">
-        <ul>
-            <li id="thick"></li>
-            <li id="thin"></li>
-        </ul>
+    <div class="penSetWrapper">
+        <div class="penSet" id="penSet">
+            <div class="penColor">
+                <ul>
+                    <li id="black" class="active"></li>
+                    <li id="red"></li>
+                    <li id="green"></li>
+                    <li id="blue"></li>
+                </ul>
+            </div>
+            <div class="penStyle">
+                <ul>
+                    <li id="small">
+                        <div></div>
+                    </li>
+                    <li id="middle" class="active">
+                        <div></div>
+                    </li>
+                    <li id="large">
+                        <div></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script src="./main.js"></script>
     <script src="//at.alicdn.com/t/font_479719_dzr8xireggbymn29.js"></script>

@@ -1,8 +1,8 @@
 var canvas = document.getElementById("zzzz");
 var context = canvas.getContext("2d");
 
-// 获取当前的size变化
-    var currentSize = 3;
+// 获取当前的画笔大小变化
+    var currentSize = 4;
 // var currentSize = toolSize.value;
 // toolSize.onchange = function() {
 //   currentSize = toolSize.value;
@@ -12,37 +12,50 @@ autoSetCanvasSize();
 
 listenToUser(canvas);
 // 设置默认的画笔颜色
-context.strokeStyle = 'red';
+context.strokeStyle = 'black';
 
+//eraser和brush切换
 var eraserEnabled = false;
 eraser.onclick = function() {
   eraserEnabled = true;
 //   tools.className = "tools x";
   eraser.classList.add('active');
   brush.classList.remove('active');
+  penSet.classList.add('disEnable');
 };
 brush.onclick = function() {
   eraserEnabled = false;
   eraser.classList.remove('active');
   brush.classList.add('active');
+  penSet.classList.remove('disEnable');
 //   tools.className = "tools";
 };
 
 //画笔颜色
+black.onclick = function(){
+    black.classList.add('active');
+    red.classList.remove('active');
+    green.classList.remove('active');
+    blue.classList.remove('active');
+    context.strokeStyle = 'balck';
+}
 red.onclick = function(){
     red.classList.add('active');
+    black.classList.remove('active');
     green.classList.remove('active');
     blue.classList.remove('active');
     context.strokeStyle = 'red';
 }
 green.onclick = function(){
     green.classList.add('active');
+    black.classList.remove('active');
     red.classList.remove('active');
     blue.classList.remove('active');
     context.strokeStyle = 'green';
 }
 blue.onclick = function(){
     blue.classList.add('active');
+    black.classList.remove('active');
     red.classList.remove('active');
     green.classList.remove('active');
     context.strokeStyle = 'blue';
@@ -62,7 +75,25 @@ xiazai.onclick = function(){
     a.target = '_blank';
     a.click();
 }
-
+//画笔大小
+large.onclick = function(){
+  large.classList.add('active');
+  small.classList.remove('active');
+  middle.classList.remove('active');
+  currentSize = 7;
+}
+middle.onclick = function(){
+  middle.classList.add('active');
+  small.classList.remove('active');
+  large.classList.remove('active');
+  currentSize = 4;
+}
+small.onclick = function(){
+  small.classList.add('active');
+  large.classList.remove('active');
+  middle.classList.remove('active');
+  currentSize = 1;
+}
 
 /***************/
 function listenToUser(canvas) {
